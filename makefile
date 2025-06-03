@@ -18,7 +18,7 @@ OBJECTS_S = $(SRC_S:%.c=%.o)
 SRC_C = $(SRC_PATH)/client.c
 OBJECTS_C = $(SRC_C:%.c=%.o)
 
-all: libft $(SERVER)
+all: libft $(SERVER) $(CLIENT)
 
 libft:
 	@if [ ! -f "$(LIBFT)" ]; then \
@@ -28,16 +28,19 @@ libft:
 $(SERVER): $(OBJECTS_S)
 	$(COMPILER) $(OBJECTS_S) $(LIBFT) -o $(SERVER)
 
+$(CLIENT): $(OBJECTS_C)
+	$(COMPILER) $(OBJECTS_C) $(LIBFT) -o $(CLIENT)
+
 %.o: %.c
 	$(COMPILER) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@rm -r $(OBJECTS_S)
+	@rm -r $(OBJECTS_S) $(OBJECTS_C)
 	@make clean -s -C $(LIBFT_PATH)
 	@echo "clean done!"
 
 fclean: clean
-	@rm -r $(SERVER)
+	@rm -r $(SERVER) $(CLIENT)
 	@make fclean -s -C $(LIBFT_PATH)
 	@echo "fclean done!"
 
