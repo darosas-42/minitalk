@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
         return (1);
-    i = 0;
+    i = -1;
     pid = ft_atoi(argv[1]);
-    while (argv[2][i])
+    while (argv[2][++i])
         send_signal(argv[2][i], pid);
 }
